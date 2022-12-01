@@ -21,6 +21,7 @@ module.exports = class Header {
         dataEncyption: this.dataEncyption,
         wheatherToSubContract: this.wheatherToSubContract,
       },
+      terminalPhoneNumber: this.terminalPhoneNumber,
     };
   }
 
@@ -71,6 +72,12 @@ module.exports = class Header {
   get wheatherToSubContract() {
     let result = this.messageBodyAttributes(2, 3);
     result = result === "1" ? "Long Message" : "Not Long Message";
+    return result;
+  }
+
+  get terminalPhoneNumber() {
+    let result = this.d.slice(4, 10);
+    result = arrToString(result);
     return result;
   }
 };
