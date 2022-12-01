@@ -1,3 +1,4 @@
+const Header = require("./header");
 const { pairSplit, restoreEscape } = require("./lib");
 
 module.exports = class JT808 {
@@ -13,5 +14,11 @@ module.exports = class JT808 {
     result = restoreEscape(result);
     result = pairSplit(result);
     return result;
+  }
+
+  get header() {
+    const prop = this.d.slice(1, 13);
+    const h = new Header(prop);
+    return h.props;
   }
 };
