@@ -15,52 +15,45 @@ module.exports = class LocationInformationReport extends Body {
     };
   }
 
-  alarmSign() {
-    let result = "";
-    this.d.slice(0, 4).map((hex) => {
-      result += hexToBin(hex);
-    });
-    return result;
-  }
-
   get locationBasicInformation() {
+    const alarmSign = this.alarmSign;
     const status = this.status;
 
     return {
       alarmSign: {
-        emergencyAlarm: this.emergencyAlarm,
-        overspeedAlarm: this.overspeedAlarm,
-        drivingAlarmMalfunction: this.drivingAlarmMalfunction,
-        riskWarning: this.riskWarning,
-        gnssModuleMalfunction: this.gnssModuleMalfunction,
-        gnssAntennaWasNotConnectedOrCut: this.gnssAntennaWasNotConnectedOrCut,
-        gnssAntennaShortCircuited: this.gnssAntennaShortCircuited,
-        terminalMainPowerUndervoltage: this.terminalMainPowerUndervoltage,
-        terminalMainPowerIsTurnedOff: this.terminalMainPowerIsTurnedOff,
-        terminalLCDOrDisplayMalfunction: this.terminalLCDOrDisplayMalfunction,
-        ttsModuleMalfunction: this.ttsModuleMalfunction,
-        cameraMalfunction: this.cameraMalfunction,
+        emergencyAlarm: alarmSign[alarmSign.length - 1],
+        overspeedAlarm: alarmSign[alarmSign.length - 2],
+        drivingAlarmMalfunction: alarmSign[alarmSign.length - 3],
+        riskWarning: alarmSign[alarmSign.length - 4],
+        gnssModuleMalfunction: alarmSign[alarmSign.length - 5],
+        gnssAntennaWasNotConnectedOrCut: alarmSign[alarmSign.length - 6],
+        gnssAntennaShortCircuited: alarmSign[alarmSign.length - 7],
+        terminalMainPowerUndervoltage: alarmSign[alarmSign.length - 8],
+        terminalMainPowerIsTurnedOff: alarmSign[alarmSign.length - 9],
+        terminalLCDOrDisplayMalfunction: alarmSign[alarmSign.length - 10],
+        ttsModuleMalfunction: alarmSign[alarmSign.length - 11],
+        cameraMalfunction: alarmSign[alarmSign.length - 12],
         roadTransportCertificateICCardModuleMalfunction:
-          this.roadTransportCertificateICCardModuleMalfunction,
-        overspeedWarning: this.overspeedWarning,
-        fatigueDrivingWarning: this.fatigueDrivingWarning,
-        reserve: this.alarmSignReserve,
+          alarmSign[alarmSign.length - 13],
+        overspeedWarning: alarmSign[alarmSign.length - 14],
+        fatigueDrivingWarning: alarmSign[alarmSign.length - 15],
+        reserve: alarmSign.slice(alarmSign.length - 18, alarmSign.length - 15),
         accumulatedOverspeedDrivingTimeOfTheDay:
-          this.accumulatedOverspeedDrivingTimeOfTheDay,
-        timeoutParking: this.timeoutParking,
-        enterAndExitTheArea: this.enterAndExitTheArea,
-        enterAndExitTheRoute: this.enterAndExitTheRoute,
+          alarmSign[alarmSign.length - 19],
+        timeoutParking: alarmSign[alarmSign.length - 20],
+        enterAndExitTheArea: alarmSign[alarmSign.length - 21],
+        enterAndExitTheRoute: alarmSign[alarmSign.length - 22],
         drivingTimeOfTheRouteIsNotEnoughOrTooLong:
-          this.drivingTimeOfTheRouteIsNotEnoughOrTooLong,
-        offTrackAlarm: this.offTrackAlarm,
-        vehicleVssMalfunction: this.vehicleVssMalfunction,
-        abnormalFuelCapacityOfVehicle: this.abnormalFuelCapacityOfVehicle,
-        vehicleIsStolen: this.vehicleIsStolen,
-        illegalIgnitionOfVehicle: this.illegalIgnitionOfVehicle,
-        illegalDisplacementOfVehicle: this.illegalDisplacementOfVehicle,
-        collisionWarning: this.collisionWarning,
-        rolloverWarning: this.rolloverWarning,
-        illegalOpenDoors: this.illegalOpenDoors,
+          alarmSign[alarmSign.length - 23],
+        offTrackAlarm: alarmSign[alarmSign.length - 24],
+        vehicleVssMalfunction: alarmSign[alarmSign.length - 25],
+        abnormalFuelCapacityOfVehicle: alarmSign[alarmSign.length - 26],
+        vehicleIsStolen: alarmSign[alarmSign.length - 27],
+        illegalIgnitionOfVehicle: alarmSign[alarmSign.length - 28],
+        illegalDisplacementOfVehicle: alarmSign[alarmSign.length - 29],
+        collisionWarning: alarmSign[alarmSign.length - 30],
+        rolloverWarning: alarmSign[alarmSign.length - 31],
+        illegalOpenDoors: alarmSign[alarmSign.length - 32],
       },
       status: {
         acc: status[status.length - 1],
@@ -87,182 +80,11 @@ module.exports = class LocationInformationReport extends Body {
     };
   }
 
-  get emergencyAlarm() {
-    let result = this.alarmSign();
-    result = result[result.length - 1];
-    return result;
-  }
-
-  get overspeedAlarm() {
-    let result = this.alarmSign();
-    result = result[result.length - 2];
-    return result;
-  }
-
-  get drivingAlarmMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 3];
-    return result;
-  }
-
-  get riskWarning() {
-    let result = this.alarmSign();
-    result = result[result.length - 4];
-    return result;
-  }
-
-  get gnssModuleMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 5];
-    return result;
-  }
-
-  get gnssAntennaWasNotConnectedOrCut() {
-    let result = this.alarmSign();
-    result = result[result.length - 6];
-    return result;
-  }
-
-  get gnssAntennaShortCircuited() {
-    let result = this.alarmSign();
-    result = result[result.length - 7];
-    return result;
-  }
-
-  get terminalMainPowerUndervoltage() {
-    let result = this.alarmSign();
-    result = result[result.length - 8];
-    return result;
-  }
-  get terminalMainPowerIsTurnedOff() {
-    let result = this.alarmSign();
-    result = result[result.length - 9];
-    return result;
-  }
-
-  get terminalLCDOrDisplayMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 10];
-    return result;
-  }
-
-  get ttsModuleMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 11];
-    return result;
-  }
-
-  get cameraMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 12];
-    return result;
-  }
-
-  get roadTransportCertificateICCardModuleMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 13];
-    return result;
-  }
-
-  get overspeedWarning() {
-    let result = this.alarmSign();
-    result = result[result.length - 14];
-    return result;
-  }
-
-  get fatigueDrivingWarning() {
-    let result = this.alarmSign();
-    result = result[result.length - 15];
-    return result;
-  }
-
-  get alarmSignReserve() {
-    let result = this.alarmSign();
-    result = result.slice(result.length - 18, result.length - 16);
-    return result;
-  }
-
-  get accumulatedOverspeedDrivingTimeOfTheDay() {
-    let result = this.alarmSign();
-    result = result[result.length - 19];
-    return result;
-  }
-
-  get timeoutParking() {
-    let result = this.alarmSign();
-    result = result[result.length - 20];
-    return result;
-  }
-
-  get enterAndExitTheArea() {
-    let result = this.alarmSign();
-    result = result[result.length - 21];
-    return result;
-  }
-
-  get enterAndExitTheRoute() {
-    let result = this.alarmSign();
-    result = result[result.length - 22];
-    return result;
-  }
-
-  get drivingTimeOfTheRouteIsNotEnoughOrTooLong() {
-    let result = this.alarmSign();
-    result = result[result.length - 23];
-    return result;
-  }
-
-  get offTrackAlarm() {
-    let result = this.alarmSign();
-    result = result[result.length - 24];
-    return result;
-  }
-
-  get vehicleVssMalfunction() {
-    let result = this.alarmSign();
-    result = result[result.length - 25];
-    return result;
-  }
-
-  get abnormalFuelCapacityOfVehicle() {
-    let result = this.alarmSign();
-    result = result[result.length - 26];
-    return result;
-  }
-
-  get vehicleIsStolen() {
-    let result = this.alarmSign();
-    result = result[result.length - 27];
-    return result;
-  }
-
-  get illegalIgnitionOfVehicle() {
-    let result = this.alarmSign();
-    result = result[result.length - 28];
-    return result;
-  }
-
-  get illegalDisplacementOfVehicle() {
-    let result = this.alarmSign();
-    result = result[result.length - 29];
-    return result;
-  }
-
-  get collisionWarning() {
-    let result = this.alarmSign();
-    result = result[result.length - 30];
-    return result;
-  }
-
-  get rolloverWarning() {
-    let result = this.alarmSign();
-    result = result[result.length - 31];
-    return result;
-  }
-
-  get illegalOpenDoors() {
-    let result = this.alarmSign();
-    result = result[result.length - 32];
+  get alarmSign() {
+    let result = "";
+    this.d.slice(0, 4).map((hex) => {
+      result += hexToBin(hex);
+    });
     return result;
   }
 
