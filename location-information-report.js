@@ -24,6 +24,8 @@ module.exports = class LocationInformationReport extends Body {
   }
 
   get locationBasicInformation() {
+    const status = this.status;
+
     return {
       alarmSign: {
         emergencyAlarm: this.emergencyAlarm,
@@ -59,6 +61,28 @@ module.exports = class LocationInformationReport extends Body {
         collisionWarning: this.collisionWarning,
         rolloverWarning: this.rolloverWarning,
         illegalOpenDoors: this.illegalOpenDoors,
+      },
+      status: {
+        acc: status[status.length - 1],
+        positioning: status[status.length - 2],
+        latitude: status[status.length - 3],
+        longitude: status[status.length - 4],
+        running: status[status.length - 5],
+        latitudeLongitudeEncryption: status[status.length - 6],
+        reserve: status.slice(status.length - 9, status.length - 7),
+        load: status[status.length - 10],
+        vehicleOilLine: status[status.length - 11],
+        vehicleCircuit: status[status.length - 12],
+        vehicleDoor: status[status.length - 13],
+        door1: status[status.length - 14],
+        door2: status[status.length - 15],
+        door3: status[status.length - 16],
+        door4: status[status.length - 17],
+        door5: status[status.length - 18],
+        gpsPositioning: status[status.length - 19],
+        beidouPositioning: status[status.length - 20],
+        galileo: status[status.length - 21],
+        reserve2: status.slice(status.length - 32, status.length - 22),
       },
     };
   }
@@ -239,6 +263,14 @@ module.exports = class LocationInformationReport extends Body {
   get illegalOpenDoors() {
     let result = this.alarmSign();
     result = result[result.length - 32];
+    return result;
+  }
+
+  get status() {
+    let result = "";
+    this.d.slice(4, 8).map((hex) => {
+      result += hexToBin(hex);
+    });
     return result;
   }
 };
