@@ -1,5 +1,5 @@
 const Body = require("./body");
-const { hexToBin } = require("./lib");
+const { hexToBin, arrToString, removeWhiteSpace, hexToDec } = require("./lib");
 
 module.exports = class LocationInformationReport extends Body {
   d;
@@ -77,6 +77,11 @@ module.exports = class LocationInformationReport extends Body {
         galileo: status[status.length - 21],
         reserve2: status.slice(status.length - 32, status.length - 22),
       },
+      latitude: this.latitude,
+      longitude: this.longitude,
+      elevation: this.elevation,
+      speed: this.speed,
+      direction: this.direction,
     };
   }
 
@@ -93,6 +98,46 @@ module.exports = class LocationInformationReport extends Body {
     this.d.slice(4, 8).map((hex) => {
       result += hexToBin(hex);
     });
+    return result;
+  }
+
+  get latitude() {
+    let result = this.d.slice(8, 12);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
+    result = hexToDec(result);
+    return result;
+  }
+
+  get longitude() {
+    let result = this.d.slice(12, 16);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
+    result = hexToDec(result);
+    return result;
+  }
+
+  get elevation() {
+    let result = this.d.slice(16, 18);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
+    result = hexToDec(result);
+    return result;
+  }
+
+  get speed() {
+    let result = this.d.slice(18, 20);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
+    result = hexToDec(result);
+    return result;
+  }
+
+  get direction() {
+    let result = this.d.slice(20, 22);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
+    result = hexToDec(result);
     return result;
   }
 };
