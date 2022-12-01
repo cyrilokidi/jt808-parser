@@ -1,5 +1,6 @@
 const Header = require("./header");
 const { pairSplit, restoreEscape } = require("./lib");
+const LocationInformationReport = require("./location-information-report");
 
 module.exports = class JT808 {
   d;
@@ -20,5 +21,18 @@ module.exports = class JT808 {
     const prop = this.d.slice(1, 13);
     const h = new Header(prop);
     return h.props;
+  }
+
+  get body() {
+    const b = this.d.slice(13, this.d.length - 2);
+
+    switch (this.header.messageType) {
+      case "LOCATION_INFORMATION_REPORT":
+        const locationInformationReport = new LocationInformationReport(b);
+        return locationInformationReport.data;
+
+      default:
+        throw new Error("Invalid message type.");
+    }
   }
 };
