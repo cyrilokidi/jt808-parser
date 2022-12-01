@@ -22,6 +22,7 @@ module.exports = class Header {
         wheatherToSubContract: this.wheatherToSubContract,
       },
       terminalPhoneNumber: this.terminalPhoneNumber,
+      messageSequenceNumber: this.messageSequenceNumber,
     };
   }
 
@@ -78,6 +79,14 @@ module.exports = class Header {
   get terminalPhoneNumber() {
     let result = this.d.slice(4, 10);
     result = arrToString(result);
+    return result;
+  }
+
+  get messageSequenceNumber() {
+    let result = this.d.slice(10, 12);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
+    result = hexToDec(result);
     return result;
   }
 };
