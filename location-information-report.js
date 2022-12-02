@@ -82,6 +82,7 @@ module.exports = class LocationInformationReport extends Body {
       elevation: this.elevation,
       speed: this.speed,
       direction: this.direction,
+      gpsTime: this.gpsTime,
     };
   }
 
@@ -138,6 +139,13 @@ module.exports = class LocationInformationReport extends Body {
     result = arrToString(result);
     result = removeWhiteSpace(result);
     result = hexToDec(result);
+    return result;
+  }
+
+  get gpsTime() {
+    let result = this.d.slice(22, 28);
+    result = arrToString(result);
+    result = removeWhiteSpace(result);
     return result;
   }
 };
