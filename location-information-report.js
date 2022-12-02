@@ -12,6 +12,7 @@ module.exports = class LocationInformationReport extends Body {
   get data() {
     return {
       locationBasicInformation: this.locationBasicInformation,
+      locationAdditionalInformation: this.locationAdditionalInformation,
     };
   }
 
@@ -146,6 +147,20 @@ module.exports = class LocationInformationReport extends Body {
     let result = this.d.slice(22, 28);
     result = arrToString(result);
     result = removeWhiteSpace(result);
+    return result;
+  }
+
+  get locationAdditionalInformation() {
+    const props = this.d.slice(28);
+    let result = [];
+    for (let i = 0; i < props.length; i++) {
+      const item = {};
+      item.id = props[i];
+      item.length = props[i + 1];
+      item.information = props.slice(i + 2, i + 2 + Number(item.length));
+      result.push(item);
+      i += i + 1 + Number(item.length);
+    }
     return result;
   }
 };
