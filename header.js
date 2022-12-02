@@ -15,7 +15,7 @@ module.exports = class Header {
 
   get props() {
     return {
-      messageType: this.messageType(this.messageId),
+      messageId: this.messageId,
       messageBodyAttributes: {
         messageBodyLength: this.messageBodyLength,
         dataEncyption: this.dataEncyption,
@@ -30,18 +30,7 @@ module.exports = class Header {
     let result = this.d.slice(0, 2);
     result = arrToString(result);
     result = removeWhiteSpace(result);
-    result = hexToDec(result);
     return result;
-  }
-
-  messageType(msgId) {
-    switch (msgId) {
-      case 512:
-        return "LOCATION_INFORMATION_REPORT";
-
-      default:
-        throw new Error("Invalid message type.");
-    }
   }
 
   messageBodyAttributes(attr) {
