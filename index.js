@@ -2,6 +2,7 @@ const Header = require("./header");
 const { pairSplit, restoreEscape } = require("./lib");
 const LocationInformationReport = require("./location-information-report");
 const TerminalAuthentication = require("./terminal-authentication");
+const TerminalRegistration = require("./terminal-registration");
 
 module.exports = class JT808 {
   d;
@@ -31,9 +32,14 @@ module.exports = class JT808 {
       case "0200":
         const locationInformationReport = new LocationInformationReport(b);
         return locationInformationReport.data;
+
       case "0102":
         const terminalAuthentication = new TerminalAuthentication(b);
         return terminalAuthentication.data;
+
+      case "0100":
+        const terminalRegistration = new TerminalRegistration(b);
+        return terminalRegistration.data;
 
       default:
         throw new Error("Invalid message type.");
