@@ -31,3 +31,7 @@ export const restoreEscape = (str: RegExpMatchArray): string => {
     }
     return result;
 }
+
+export const arrToString = (arr: string[]): string => arr.join("");
+
+export const removeWhiteSpace = (str: string): string => str.replace(/\s+/g, "")
