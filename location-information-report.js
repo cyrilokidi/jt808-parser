@@ -153,16 +153,20 @@ module.exports = class LocationInformationReport extends Body {
   get locationAdditionalInformation() {
     const props = this.d.slice(28);
     let result = [];
-    for (let i = 0; i < props.length; i++) {
+    let i = 0;
+    while (i < props.length) {
       const item = {};
       item.id = props[i];
       item.length = props[i + 1];
-      item.information = props.slice(i + 2, i + 2 + Number(item.length));
+      item.information = props.slice(
+        i + 1 + 1,
+        i + 1 + 1 + Number(item.length)
+      );
       item.information = arrToString(item.information);
       item.information = removeWhiteSpace(item.information);
       item.information = hexToDec(item.information);
       result.push(item);
-      i += i + 1 + Number(item.length);
+      i += 1 + 1 + Number(item.length);
     }
     return result;
   }
