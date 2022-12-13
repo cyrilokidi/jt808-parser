@@ -1,0 +1,1 @@
+let tmp: string = "Hello world";
