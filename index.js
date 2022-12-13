@@ -26,8 +26,8 @@ module.exports = class JT808 {
   get body() {
     const b = this.d.slice(13, this.d.length - 2);
 
-    switch (this.header.messageType) {
-      case "LOCATION_INFORMATION_REPORT":
+    switch (this.header.messageId) {
+      case "0200":
         const locationInformationReport = new LocationInformationReport(b);
         return locationInformationReport.data;
 
