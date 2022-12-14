@@ -39,3 +39,5 @@ export const removeWhiteSpace = (str: string): string => str.replace(/\s+/g, "")
 export const hexToBin = (hex: string): string => parseInt(hex, 16).toString(2).padStart(8, "0");
 
 export const binToDec = (bin: string): number => parseInt(bin, 2);
+
+export const hexToDec = (hex: string): number => parseInt(hex, 16);

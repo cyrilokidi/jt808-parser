@@ -1,4 +1,4 @@
-import { arrToString, binToDec, hexToBin, removeWhiteSpace } from "./lib";
+import { arrToString, binToDec, hexToBin, hexToDec, removeWhiteSpace } from "./lib";
 
 export enum EMessageId {
     ["LocationInformationReport"] = "0200"
@@ -11,6 +11,7 @@ export interface IAttr {
     whetherToSubContract: string,
     reserve: string,
     terminalPhoneNumber: string,
+    messageSequenceNumber: number,
 }
 
 export default class Header {
@@ -28,6 +29,7 @@ export default class Header {
             whetherToSubContract: this.whetherToSubContract,
             reserve: this.reserve,
             terminalPhoneNumber: this.terminalPhoneNumber,
+            messageSequenceNumber: this.messageSequenceNumber,
         };
     }
 
@@ -71,6 +73,14 @@ export default class Header {
     private get terminalPhoneNumber(): string {
         let result: string | string[] = this.d.slice(4, 10);
         result = arrToString(result);
+        return result;
+    }
+
+    private get messageSequenceNumber(): number {
+        let result: string | string[] | number = this.d.slice(10, 12);
+        result = arrToString(result);
+        result = removeWhiteSpace(result);
+        result = hexToDec(result);
         return result;
     }
 }
