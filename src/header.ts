@@ -4,12 +4,16 @@ export enum EMessageId {
     ["LocationInformationReport"] = "0200"
 }
 
-export interface IAttr {
-    messageId: EMessageId,
+export interface IMessageBodyAttributes {
     messageBodyLength: number,
     dataEncyption: string,
     whetherToSubContract: string,
     reserve: string,
+}
+
+export interface IAttr {
+    messageId: EMessageId,
+    messageBodyAttributes: IMessageBodyAttributes,
     terminalPhoneNumber: string,
     messageSequenceNumber: number,
 }
@@ -24,10 +28,12 @@ export default class Header {
     public attr(): IAttr {
         return {
             messageId: this.messageId,
-            messageBodyLength: this.messageBodyLength,
-            dataEncyption: this.dataEncyption,
-            whetherToSubContract: this.whetherToSubContract,
-            reserve: this.reserve,
+            messageBodyAttributes: {
+                messageBodyLength: this.messageBodyLength,
+                dataEncyption: this.dataEncyption,
+                whetherToSubContract: this.whetherToSubContract,
+                reserve: this.reserve,
+            },
             terminalPhoneNumber: this.terminalPhoneNumber,
             messageSequenceNumber: this.messageSequenceNumber,
         };
