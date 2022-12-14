@@ -39,7 +39,7 @@ export default class JT808 {
                 return terminalRegistration.data;
 
             default:
-                throw new Error("Invalid message id");
+                throw new Error(`Invalid message id "${this.header.messageId}"`);
         }
     }
 }
