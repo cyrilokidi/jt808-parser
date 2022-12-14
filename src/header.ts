@@ -10,6 +10,7 @@ export interface IAttr {
     dataEncyption: string,
     whetherToSubContract: string,
     reserve: string,
+    terminalPhoneNumber: string,
 }
 
 export default class Header {
@@ -26,6 +27,7 @@ export default class Header {
             dataEncyption: this.dataEncyption,
             whetherToSubContract: this.whetherToSubContract,
             reserve: this.reserve,
+            terminalPhoneNumber: this.terminalPhoneNumber,
         };
     }
 
@@ -63,6 +65,12 @@ export default class Header {
 
     private get reserve(): string {
         let result: string = this.messageBodyAttributes(0, 2);
+        return result;
+    }
+
+    private get terminalPhoneNumber(): string {
+        let result: string | string[] = this.d.slice(4, 10);
+        result = arrToString(result);
         return result;
     }
 }
