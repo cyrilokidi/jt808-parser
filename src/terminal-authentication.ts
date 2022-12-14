@@ -1,9 +1,6 @@
+import { ITerminalAuthenticationData } from ".";
 import Body from "./body";
 import { arrToString, removeWhiteSpace } from "./lib";
-
-export interface ITerminalAuthenticationData {
-    authenticationCode: string,
-}
 
 export default class TerminalAuthentication extends Body {
     private readonly d: string[];

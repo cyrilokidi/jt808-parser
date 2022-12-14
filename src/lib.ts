@@ -1,15 +1,6 @@
+import { EEscapeChar, EEscapeRestoreChar } from ".";
+
 export const pairSplit = (str: string): string[] | null => str.match(/(..?)/g);
-
-export enum EEscapeChar {
-    ["7D"] = "7D",
-    ["01"] = "01",
-    ["02"] = "02",
-}
-
-export enum EEscapeRestoreChar {
-    ["7E"] = "7E",
-    ["7D"] = "7D",
-}
 
 export const restoreEscape = (str: string[]): string => {
     let result: string = "";

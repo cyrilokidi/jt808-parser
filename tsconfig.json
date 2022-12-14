@@ -4,10 +4,8 @@
     "preserveConstEnums": true,
     "outDir": "./dist",
     "allowJs": true,
-    "target": "es5"
-    // "declaration": true,
-    // "emitDeclarationOnly": true,
-    // "declarationMap": true
+    "target": "es5",
+    "declaration": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

@@ -1,24 +1,5 @@
+import { EMessageId, IHeaderAttr } from ".";
 import { arrToString, binToDec, hexToBin, hexToDec, removeWhiteSpace } from "./lib";
-
-export enum EMessageId {
-    ["LocationInformationReport"] = "0200",
-    ["TerminalAuthentication"] = "0102",
-    ["TerminalRegistration"] = "0100"
-}
-
-export interface IMessageBodyAttributes {
-    messageBodyLength: number,
-    dataEncyption: string,
-    whetherToSubContract: string,
-    reserve: string,
-}
-
-export interface IAttr {
-    messageId: EMessageId,
-    messageBodyAttributes: IMessageBodyAttributes,
-    terminalPhoneNumber: string,
-    messageSequenceNumber: number,
-}
 
 export default class Header {
     private readonly d: string[];
@@ -27,7 +8,7 @@ export default class Header {
         this.d = str;
     }
 
-    public get attr(): IAttr {
+    public get attr(): IHeaderAttr {
         return {
             messageId: this.messageId,
             messageBodyAttributes: {
