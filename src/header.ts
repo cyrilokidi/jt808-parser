@@ -3,6 +3,7 @@ import { arrToString, binToDec, hexToBin, hexToDec, removeWhiteSpace } from "./l
 export enum EMessageId {
     ["LocationInformationReport"] = "0200",
     ["TerminalAuthentication"] = "0102",
+    ["TerminalRegistration"] = "0100"
 }
 
 export interface IMessageBodyAttributes {

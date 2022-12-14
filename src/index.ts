@@ -1,8 +1,9 @@
 import Header, { EMessageId, IAttr } from "./header";
 import { pairSplit, restoreEscape } from "./lib";
 import TerminalAuthentication, { ITerminalAuthenticationData } from "./terminal-authentication";
+import TerminalRegistration from "./terminal-registration";
 
-export type TBodyData = ITerminalAuthenticationData;
+export type TBodyData = ITerminalAuthenticationData | string[];
 
 export default class JT808 {
     private readonly d: string[];
@@ -32,6 +33,10 @@ export default class JT808 {
             case EMessageId["TerminalAuthentication"]:
                 const terminalAuthentication = new TerminalAuthentication(b);
                 return terminalAuthentication.data;
+
+            case EMessageId["TerminalRegistration"]:
+                const terminalRegistration = new TerminalRegistration(b);
+                return terminalRegistration.data;
 
             default:
                 throw new Error("Invalid message id");
