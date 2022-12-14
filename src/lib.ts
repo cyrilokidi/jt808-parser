@@ -1,4 +1,4 @@
-export const pairSplit = (str: string): RegExpMatchArray | null => str.match(/(..?)/g);
+export const pairSplit = (str: string): string[] | null => str.match(/(..?)/g);
 
 export enum EEscapeChar {
     ["7D"] = "7D",
@@ -11,7 +11,7 @@ export enum EEscapeRestoreChar {
     ["7D"] = "7D",
 }
 
-export const restoreEscape = (str: RegExpMatchArray): string => {
+export const restoreEscape = (str: string[]): string => {
     let result: string = "";
     for (let i = 0; i < str.length; i++) {
         const isFlagBit: boolean = i === 0 || i === str.length - 1;

@@ -19,13 +19,13 @@ export interface IAttr {
 }
 
 export default class Header {
-    private readonly d: RegExpMatchArray;
+    private readonly d: string[];
 
-    constructor(str: RegExpMatchArray) {
+    constructor(str: string[]) {
         this.d = str;
     }
 
-    public attr(): IAttr {
+    public get attr(): IAttr {
         return {
             messageId: this.messageId,
             messageBodyAttributes: {
