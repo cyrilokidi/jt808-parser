@@ -1,7 +1,8 @@
 import { arrToString, binToDec, hexToBin, hexToDec, removeWhiteSpace } from "./lib";
 
 export enum EMessageId {
-    ["LocationInformationReport"] = "0200"
+    ["LocationInformationReport"] = "0200",
+    ["TerminalAuthentication"] = "0102",
 }
 
 export interface IMessageBodyAttributes {
