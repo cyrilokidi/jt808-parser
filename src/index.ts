@@ -1,9 +1,12 @@
 import Header, { EMessageId, IAttr } from "./header";
 import { pairSplit, restoreEscape } from "./lib";
+import LocationInformationReport, { ILocationInformationReportData } from "./location-information-report";
 import TerminalAuthentication, { ITerminalAuthenticationData } from "./terminal-authentication";
 import TerminalRegistration from "./terminal-registration";
 
-export type TBodyData = ITerminalAuthenticationData | string[];
+export type TBodyData = ITerminalAuthenticationData
+    | string[]
+    | ILocationInformationReportData;
 
 export default class JT808 {
     private readonly d: string[];
@@ -37,6 +40,10 @@ export default class JT808 {
             case EMessageId["TerminalRegistration"]:
                 const terminalRegistration = new TerminalRegistration(b);
                 return terminalRegistration.data;
+
+            case EMessageId["LocationInformationReport"]:
+                const locationInformationReport = new LocationInformationReport(b);
+                return locationInformationReport.data;
 
             default:
                 throw new Error(`Invalid message id "${this.header.messageId}"`);

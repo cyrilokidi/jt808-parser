@@ -90,7 +90,7 @@ export default class LocationInformationReport extends Body {
     public get data(): ILocationInformationReportData {
         return {
             locationBasicInformation: this.locationBasicInformation,
-            locationAdditionalInformation: {},
+            locationAdditionalInformation: this.locationAdditionalInformation,
         }
     }
 
