@@ -1,31 +1,48 @@
 import { TData } from ".";
-import { arrToString, removeWhiteSpace } from "./lib";
+import { arrToString, binToDec, hexToBin, removeWhiteSpace } from "./lib";
 
 export enum EMessageId {
     ["LocationInformationReport"] = "0200"
 }
 
-export interface IMeta {
-    messageId: EMessageId
+export interface IAttr {
+    messageId: EMessageId,
+    messageBodyLength: number,
 }
 
 export default class Header {
-    private readonly d: TData;
+    private readonly d: RegExpMatchArray;
 
-    constructor(str: TData) {
+    constructor(str: RegExpMatchArray) {
         this.d = str;
     }
 
-    public meta(): IMeta {
+    public attr(): IAttr {
         return {
-            messageId: this.messageId
+            messageId: this.messageId,
+            messageBodyLength: this.messageBodyLength,
         };
     }
 
     private get messageId(): EMessageId {
-        let result = this.d?.slice(0, 2);
-        result = arrToString(result as string[]);
+        let result: string | string[] = this.d.slice(0, 2);
+        result = arrToString(result);
         result = removeWhiteSpace(result);
         return result as EMessageId;
+    }
+
+    private messageBodyAttributes(start: number, end: number): string {
+        let result: string = "";
+        this.d?.slice(2, 4).map((hex: string) => {
+            result += hexToBin(hex);
+        });
+        result = result.slice(start, end);
+        return result;
+    }
+
+    private get messageBodyLength(): number {
+        let result: string | number = this.messageBodyAttributes(6, 15);
+        result = binToDec(result);
+        return result;
     }
 }
