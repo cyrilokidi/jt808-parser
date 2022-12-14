@@ -1,4 +1,3 @@
-import { TData } from ".";
 import { arrToString, binToDec, hexToBin, removeWhiteSpace } from "./lib";
 
 export enum EMessageId {
@@ -8,6 +7,7 @@ export enum EMessageId {
 export interface IAttr {
     messageId: EMessageId,
     messageBodyLength: number,
+    dataEncyption: string,
 }
 
 export default class Header {
@@ -21,6 +21,7 @@ export default class Header {
         return {
             messageId: this.messageId,
             messageBodyLength: this.messageBodyLength,
+            dataEncyption: this.dataEncyption,
         };
     }
 
@@ -43,6 +44,11 @@ export default class Header {
     private get messageBodyLength(): number {
         let result: string | number = this.messageBodyAttributes(6, 15);
         result = binToDec(result);
+        return result;
+    }
+
+    private get dataEncyption(): string {
+        let result: string = this.messageBodyAttributes(3, 6);
         return result;
     }
 }
