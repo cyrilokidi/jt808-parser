@@ -9,6 +9,7 @@ export interface IAttr {
     messageBodyLength: number,
     dataEncyption: string,
     whetherToSubContract: string,
+    reserve: string,
 }
 
 export default class Header {
@@ -24,6 +25,7 @@ export default class Header {
             messageBodyLength: this.messageBodyLength,
             dataEncyption: this.dataEncyption,
             whetherToSubContract: this.whetherToSubContract,
+            reserve: this.reserve,
         };
     }
 
@@ -56,6 +58,11 @@ export default class Header {
 
     private get whetherToSubContract(): string {
         let result: string = this.messageBodyAttributes(2, 3);
+        return result;
+    }
+
+    private get reserve(): string {
+        let result: string = this.messageBodyAttributes(0, 2);
         return result;
     }
 }
