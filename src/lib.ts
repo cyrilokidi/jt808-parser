@@ -1,5 +1,7 @@
 import { EEscapeChar, EEscapeRestoreChar } from ".";
 
+export const toUpperCase = (str: string): string => str.toUpperCase().replace(/FLAGBIT/, "");
+
 export const pairSplit = (str: string): string[] | null => str.match(/(..?)/g);
 
 export const restoreEscape = (str: string[]): string => {

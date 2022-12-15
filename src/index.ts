@@ -1,5 +1,5 @@
 import Header from "./header";
-import { pairSplit, restoreEscape } from "./lib";
+import { toUpperCase, pairSplit, restoreEscape } from "./lib";
 import LocationInformationReport from "./location-information-report";
 import TerminalAuthentication from "./terminal-authentication";
 import TerminalRegistration from "./terminal-registration";
@@ -130,7 +130,7 @@ export default class JT808 {
     }
 
     private deserialize(str: string): string[] {
-        let result: string | string[] | null = str.toUpperCase().replace(/FLAGBIT/, "");
+        let result: string | string[] | null = toUpperCase(str);
         result = pairSplit(result);
         result = restoreEscape(result as string[]);
         result = pairSplit(result);
