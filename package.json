@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test"
   },
   "repository": {
     "type": "git",
