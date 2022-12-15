@@ -1,12 +1,15 @@
 {
   "name": "jt808-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library to parse JT808 data",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
