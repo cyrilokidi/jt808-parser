@@ -1,4 +1,4 @@
-import { toUpperCase, pairSplit } from "../lib";
+import { toUpperCase, pairSplit, restoreEscape } from "../lib";
 
 export interface IToUpperCaseTestData {
     raw: string,
@@ -8,6 +8,11 @@ export interface IToUpperCaseTestData {
 export interface IPairSplitTestData {
     raw: string,
     result: string[],
+}
+
+export interface IRestoreEscapeTestData {
+    raw: string[],
+    result: string,
 }
 
 describe("Lib methods", () => {
@@ -26,7 +31,7 @@ describe("Lib methods", () => {
         data.map((d: IToUpperCaseTestData, i: number) => {
             test(`To uppercase example [${i}]`, () => {
                 const result = toUpperCase(d.raw);
-                expect(result).toBe(d.result);
+                expect(result).toEqual(d.result);
             });
         })
     });
@@ -47,6 +52,26 @@ describe("Lib methods", () => {
             test(`Pair split example [${i}]`, () => {
                 const result = pairSplit(d.raw);
                 expect(result).toStrictEqual(d.result);
+            });
+        });
+    });
+
+    describe("Restore escape", () => {
+        const data: IRestoreEscapeTestData[] = [
+            {
+                raw: ["7E", "02", "00", "00", "26", "12", "34", "56", "78", "90", "12", "00", "7D", "02", "00", "00", "00", "01", "00", "00", "00", "02", "00", "BA", "7F", "0E", "07", "E4", "F1", "1C", "00", "28", "00", "3C", "00", "00", "18", "10", "15", "10", "10", "10", "01", "04", "00", "00", "00", "64", "02", "02", "00", "7D", "01", "13", "7E"],
+                result: "7E02000026123456789012007E000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D137E"
+            },
+            {
+                raw: ["7E", "02", "00", "00", "41", "04", "40", "49", "20", "03", "87", "17", "BB", "00", "00", "00", "00", "00", "00", "00", "07", "00", "13", "97", "3C", "02", "32", "1A", "90", "00", "00", "00", "00", "00", "02", "22", "12", "01", "13", "01", "40", "01", "04", "00", "04", "18", "3D", "02", "02", "66", "48", "03", "02", "00", "00", "30", "01", "1D", "31", "01", "09", "D3", "02", "00", "EF", "49", "01", "00", "4A", "02", "03", "20", "2B", "04", "66", "48", "63", "23", "60", "7E"],
+                result: "7E0200004104404920038717BB00000000000000070013973C02321A9000000000000222120113014001040004183D020266480302000030011D310109D30200EF4901004A0203202B0466486323607E"
+            }
+        ];
+
+        data.map((d: IRestoreEscapeTestData, i: number) => {
+            test(`Restore escape example [${i}]`, () => {
+                const result = restoreEscape(d.raw);
+                expect(result).toEqual(d.result);
             });
         });
     });
