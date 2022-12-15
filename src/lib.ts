@@ -1,17 +1,8 @@
-export const pairSplit = (str: string): RegExpMatchArray | null => str.match(/(..?)/g);
+import { EEscapeChar, EEscapeRestoreChar } from ".";
 
-export enum EEscapeChar {
-    ["7D"] = "7D",
-    ["01"] = "01",
-    ["02"] = "02",
-}
+export const pairSplit = (str: string): string[] | null => str.match(/(..?)/g);
 
-export enum EEscapeRestoreChar {
-    ["7E"] = "7E",
-    ["7D"] = "7D",
-}
-
-export const restoreEscape = (str: RegExpMatchArray): string => {
+export const restoreEscape = (str: string[]): string => {
     let result: string = "";
     for (let i = 0; i < str.length; i++) {
         const isFlagBit: boolean = i === 0 || i === str.length - 1;
