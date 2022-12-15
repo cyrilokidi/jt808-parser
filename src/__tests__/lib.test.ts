@@ -1,12 +1,33 @@
-import { pairSplit } from "../lib";
+import { toUpperCase, pairSplit } from "../lib";
+
+export interface IToUpperCaseTestData {
+    raw: string,
+    result: string,
+}
 
 export interface IPairSplitTestData {
     raw: string,
-    result: string[]
+    result: string[],
 }
 
 describe("Lib methods", () => {
-    describe("Pair split strings", () => {
+    describe("To uppercase", () => {
+        const data: IToUpperCaseTestData[] = [
+            {
+                raw: "7E02000026123456789012007D02000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D01137E",
+                result: "7E02000026123456789012007D02000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D01137E"
+            }
+        ];
+
+        data.map((d: IToUpperCaseTestData, i: number) => {
+            test(`To uppercase example [${i}]`, () => {
+                const result = toUpperCase(d.raw);
+                expect(result).toBe(d.result);
+            });
+        })
+    });
+
+    describe("Pair split", () => {
         const data: IPairSplitTestData[] = [
             {
                 raw: "7E02000026123456789012007D02000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D01137E",
@@ -15,7 +36,7 @@ describe("Lib methods", () => {
         ];
 
         data.map((d: IPairSplitTestData, i: number) => {
-            test(`Pair split string [${i}]`, () => {
+            test(`Pair split example [${i}]`, () => {
                 const result = pairSplit(d.raw);
                 expect(result).toStrictEqual(d.result);
             });
