@@ -1,31 +1,14 @@
+import { EMessageId, IHeaderAttr } from ".";
 import { arrToString, binToDec, hexToBin, hexToDec, removeWhiteSpace } from "./lib";
 
-export enum EMessageId {
-    ["LocationInformationReport"] = "0200"
-}
-
-export interface IMessageBodyAttributes {
-    messageBodyLength: number,
-    dataEncyption: string,
-    whetherToSubContract: string,
-    reserve: string,
-}
-
-export interface IAttr {
-    messageId: EMessageId,
-    messageBodyAttributes: IMessageBodyAttributes,
-    terminalPhoneNumber: string,
-    messageSequenceNumber: number,
-}
-
 export default class Header {
-    private readonly d: RegExpMatchArray;
+    private readonly d: string[];
 
-    constructor(str: RegExpMatchArray) {
+    constructor(str: string[]) {
         this.d = str;
     }
 
-    public attr(): IAttr {
+    public get attr(): IHeaderAttr {
         return {
             messageId: this.messageId,
             messageBodyAttributes: {
